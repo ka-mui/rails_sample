@@ -1072,7 +1072,7 @@ Responsive PC/SP
 
     /* フォーム部分 */
     #form .event-form {
-        /*display: none;*/
+        display: none;
         padding: 65px 0 35px;
     }
 
@@ -1125,7 +1125,8 @@ Responsive PC/SP
     #form .event-form input[type='text'],
     #form .event-form input[type='tel'],
     #form .event-form input[type='email'],
-    #form .event-form textarea {
+    #form .event-form textarea,
+    #form .event-form select {
         width: 500px;
         background: #f3f3f3;
         padding: 5px 20px;
@@ -2116,6 +2117,7 @@ SP要 CSS
 
     /* フォーム部分 */
     #form .event-form {
+        display: none;
         padding-top: 70px;
     }
 
@@ -2539,23 +2541,4 @@ SP要 CSS
   border-color: initial;
   border-image: initial;
   border-radius: 3px;
-}
-
-#form .event-form {
-  visibility: hidden;
-  height: 0;
-  padding: 0;
-  transition: height 0 linear, visibility 0 linear;
-}
-#form .event-form.open-con {
-  visibility: visible;
-  height: auto;
-  padding: 65px 0 35px;
-  transition: all .2s linear;
-}
-
-#form #document-req .event-form {
-  visibility: visible;
-  height: auto;
-  padding: auto;
 }

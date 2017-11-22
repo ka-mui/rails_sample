@@ -242,8 +242,7 @@ $(function() {
     // ---------------------------------------
     $('#form .event-btn').click(function(){
         $(this).toggleClass('open');
-        $(this).closest('.form-block').find('.event-form').toggleClass("open-con");
-        // $(this).closest('.form-block').find('.event-form').slideToggle(300, 'swing');
+        $(this).closest('.form-block').find('.event-form').slideToggle(300, 'swing');
     });
 
     // 注意書きを開く
