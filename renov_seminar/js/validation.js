@@ -2,7 +2,7 @@
   $('document').ready(function() {
     var $form, $input, $required, $submitBtn, isValidAll, validation;
     $form = $('[data-js-elm=form]');
-    $input = $form.find(':input:visible');
+    $input = $form.find(':input');
     $required = $form.find('.required').children('td');
     $submitBtn = $('[data-js-elm=submit]');
     isValidAll = false;
@@ -57,10 +57,11 @@
             break;
         }
         $(this).parent().attr('data-inputted', isInputted);
-        return $(this).parent().attr('data-valid', isValid);
+        $(this).parent().attr('data-valid', isValid);
       });
+      $required = $('[data-js-elm=form]').find('.required').children('td');
       isValidAll = $required.filter('[data-valid="true"]').length === $required.length ? true : false;
-      return $submitBtn.attr('data-disabled', !isValidAll);
+      $submitBtn.attr('data-disabled', !isValidAll);
     };
     // $('[name=zip],[name=mobilePhone],[name=fixedPhone]').on('blur', function() {
     //   var halfWidth, val;
@@ -74,7 +75,7 @@
     //    validation($(this), true);
     // });
     $input.on('input blur change', function() {
-      return validation($(this), true);
+      validation($(this), true);
     });
     $form.on('submit', function(e) {
       var action, formData;
@@ -82,23 +83,23 @@
       formData = $form.serialize();
       action = $form.attr('action');
       $body.addClass('sendding').css('top', -my.sT);
-      return $.ajax({
+      $.ajax({
         type: 'POST',
         url: action,
         data: formData
       }).done(function(res) {
         var params;
         if (res.status === 400) {
-          return location.href = "/renov_seminar/error.html";
+          location.href = "/renov_seminar/error.html";
         } else {
           params = {
             pageId: 'inquiry-renov_seminar',
             id: res.id
           };
-          return location.href = "/renov_seminar/thanks.html?" + $.param(params);
+          location.href = "/renov_seminar/thanks.html?" + $.param(params);
         }
       }).fail(function() {
-        return location.href = "/renov_seminar/error.html";
+        location.href = "/renov_seminar/error.html";
       });
     });
     // $doc.on('input', 'textarea', function(e) {
@@ -140,11 +141,11 @@
       } else if (isTab) {
         $form.find('input').first().focus();
       }
-      return false;
+      false;
     });
-    return $submitBtn.on('click', function(e) {
+    $submitBtn.on('click', function(e) {
       if (isValidAll) {
-        return $form.submit();
+        $form.submit();
       }
     });
   });
@@ -168,5 +169,23 @@
       $(this).parents(".tel").addClass("fixed");
     }
   });
+
+  function selectColor() {
+    // 現在選択されてる項目によって色設定
+    if($('select').find('option:selected').hasClass('default')) {
+      $('select').css({'color': '#666'});
+    }
+
+  　 // 項目が変更された時、条件によって色変更
+    $('select').on('change', function(){
+      if($(this).find('option:selected').hasClass('default')) {
+        $(this).css({'color': '#666'});
+      } else {
+        $(this).css({'color': '#000'});
+      }
+    });
+  }
+
+  selectColor();
 
 }).call(this);
